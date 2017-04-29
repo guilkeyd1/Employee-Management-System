@@ -72,7 +72,7 @@
                               <Component id="txtLastname" max="32767" attributes="0"/>
                               <Component id="txtUsername" max="32767" attributes="0"/>
                               <Component id="txtPassword" max="32767" attributes="0"/>
-                              <Component id="txtConfirmpasswod" max="32767" attributes="0"/>
+                              <Component id="txtConfirmpassword" max="32767" attributes="0"/>
                               <Component id="txtAge" alignment="1" max="32767" attributes="0"/>
                               <Component id="txtEmail" alignment="1" max="32767" attributes="0"/>
                               <Component id="ddCountry" alignment="0" pref="140" max="32767" attributes="0"/>
@@ -131,7 +131,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtConfirmpasswod" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtConfirmpassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnSubmit" min="-2" max="-2" attributes="0"/>
@@ -193,7 +193,7 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="txtPassword">
         </Component>
-        <Component class="javax.swing.JPasswordField" name="txtConfirmpasswod">
+        <Component class="javax.swing.JPasswordField" name="txtConfirmpassword">
         </Component>
         <Component class="javax.swing.JButton" name="btnSubmit">
           <Properties>

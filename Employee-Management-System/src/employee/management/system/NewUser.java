@@ -5,6 +5,8 @@
  */
 package employee.management.system;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author apramodya
@@ -12,8 +14,7 @@ package employee.management.system;
 public class NewUser extends javax.swing.JFrame {
 
     DBOperations dbOps = new DBOperations();
-    
-    
+
     /**
      * Creates new form NewUser
      */
@@ -45,7 +46,7 @@ public class NewUser extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
-        txtConfirmpasswod = new javax.swing.JPasswordField();
+        txtConfirmpassword = new javax.swing.JPasswordField();
         btnSubmit = new javax.swing.JButton();
         ddCountry = new javax.swing.JComboBox();
 
@@ -105,7 +106,7 @@ public class NewUser extends javax.swing.JFrame {
                             .addComponent(txtLastname)
                             .addComponent(txtUsername)
                             .addComponent(txtPassword)
-                            .addComponent(txtConfirmpasswod)
+                            .addComponent(txtConfirmpassword)
                             .addComponent(txtAge, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(ddCountry, 0, 140, Short.MAX_VALUE)))
@@ -150,7 +151,7 @@ public class NewUser extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtConfirmpasswod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtConfirmpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSubmit)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -169,22 +170,56 @@ public class NewUser extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    void clearFields() {
+        txtFirstname.setText("");
+        txtLastname.setText("");
+        txtAge.setText("");
+        txtEmail.setText("");
+        txtUsername.setText("");
+        txtPassword.setText("");
+        txtConfirmpassword.setText("");
+
+    }
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         EmployeeDetails em = new EmployeeDetails();
-        
-        em.setRegID(0);
-        em.setFirstname(txtFirstname.getText());
-        em.setLastname(txtLastname.getText());
-        em.setAge(Integer.parseInt(txtAge.getText()));
-        em.setCountry(ddCountry.getSelectedItem().toString());
-        em.setEmail(txtEmail.getText());
-        em.setUsername(txtUsername.getText());
-        em.setPassword(txtPassword.getText());
-        
-        dbOps.addEmployee(em);
-        
+
+        if (txtPassword.getText().equals(txtConfirmpassword.getText())) {
+            int x = dbOps.checkUsername(txtUsername.getText());
+
+            if (x == 1) {
+                em.setRegID(0);
+                em.setFirstname(txtFirstname.getText());
+                em.setLastname(txtLastname.getText());
+                em.setAge(Integer.parseInt(txtAge.getText()));
+                em.setCountry(ddCountry.getSelectedItem().toString());
+                em.setEmail(txtEmail.getText());
+                em.setUsername(txtUsername.getText());
+                em.setPassword(txtPassword.getText());
+
+                boolean result = dbOps.addEmployee(em);
+
+                if (result) {
+                    JOptionPane.showMessageDialog(this, "Successfully Inserted");
+                    clearFields();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error Occurred");
+                    clearFields();
+                }
+            } else if (x == 0) {
+                JOptionPane.showMessageDialog(this, "Username already exists");
+                txtUsername.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error Occurred");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Password mismatched");
+            txtPassword.setText("");
+            txtConfirmpassword.setText("");
+        }
+
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     /**
@@ -235,7 +270,7 @@ public class NewUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtAge;
-    private javax.swing.JPasswordField txtConfirmpasswod;
+    private javax.swing.JPasswordField txtConfirmpassword;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtFirstname;
     private javax.swing.JTextField txtLastname;
